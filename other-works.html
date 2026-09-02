@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Other Work — Cristina Velasco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFEBE2;
+    --panel:#E5E0D2;
+    --ink:#1C1B18;
+    --ink-soft:#5B584F;
+    --line:#C9C1AC;
+    --accent:#2F5233;
+    --accent-soft:#3F6B46;
+    --amber:#9C6B2E;
+    --radius:3px;
+    --maxw:840px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.01em;}
+
+  /* ---------- header ---------- */
+  header{border-bottom:1px solid var(--line); padding:22px 0;}
+  header .wrap{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  .brand{font-weight:600; font-size:1.05rem; text-decoration:none;}
+  .back-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .back-link:hover{color:var(--accent); border-color:var(--accent);}
+
+  /* ---------- intro ---------- */
+  .intro{padding:64px 0 8px;}
+  .intro h1{
+    font-size:clamp(1.9rem, 4.4vw, 2.6rem);
+    font-weight:600;
+    line-height:1.2;
+    max-width:20ch;
+    letter-spacing:-0.01em;
+  }
+  .intro p{
+    margin-top:16px;
+    max-width:56ch;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+
+  /* ---------- project list ---------- */
+  section.list{padding:44px 0 60px;}
+  .project{
+    padding:28px 16px;
+    margin:0 -16px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+    cursor:pointer;
+    border-radius:var(--radius);
+    transition:background 0.15s ease;
+  }
+  .project:first-of-type{border-top:none;}
+  .project:hover, .project:focus-visible{background:var(--panel);}
+  .project:focus-visible{outline:1px solid var(--accent); outline-offset:-1px;}
+  .id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--accent);
+    padding-top:4px;
+  }
+  .project h3{font-size:1.2rem; font-weight:600; margin-bottom:8px;}
+  .project p.desc{color:var(--ink-soft); max-width:60ch;}
+  .project .meta{
+    margin-top:16px;
+    display:flex; flex-wrap:wrap; gap:10px 22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+  }
+  .project .meta .tag{color:var(--ink-soft);}
+  .project .meta .tag b{color:var(--ink); font-weight:500;}
+  .project .status{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  .project .status .sdot{width:6px; height:6px; border-radius:50%; background:var(--accent);}
+  .project .status.progress .sdot{background:var(--amber);}
+  .project .open-hint{
+    margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--accent-soft);
+  }
+  @media (max-width:560px){
+    .project{grid-template-columns:1fr; gap:8px;}
+  }
+
+  /* ---------- workflow image viewer ---------- */
+  .workflow-viewer{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel);
+    overflow:auto;
+    max-height:340px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .workflow-viewer img{
+    display:block;
+    width:100%;
+    height:auto;
+    cursor:zoom-in;
+    transition:transform 0.2s ease;
+    transform-origin:center center;
+  }
+  .workflow-viewer.zoomed{
+    align-items:flex-start;
+    justify-content:flex-start;
+  }
+  .workflow-viewer.zoomed img{
+    width:200%;
+    max-width:none;
+    cursor:zoom-out;
+  }
+  .workflow-hint{
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.74rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(28,27,24,0.55);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:56px 20px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    max-width:760px;
+    width:100%;
+    padding:36px 36px 40px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute;
+    top:20px; right:20px;
+    width:32px; height:32px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel);
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    cursor:pointer;
+    line-height:1;
+  }
+  .modal-close:hover{border-color:var(--accent); color:var(--accent);}
+  .modal .id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--accent);
+  }
+  .modal h3{
+    font-size:1.5rem;
+    font-weight:600;
+    margin-top:6px;
+    padding-right:40px;
+  }
+  .modal .modal-section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin:30px 0 14px;
+  }
+  .how-list{counter-reset:step;}
+  .how-item{
+    counter-increment:step;
+    padding:14px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:28px 1fr;
+    gap:10px;
+  }
+  .how-item:first-child{border-top:none;}
+  .how-item::before{
+    content:counter(step);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--accent);
+  }
+  .how-item p{color:var(--ink-soft); font-size:0.95rem;}
+  @media (max-width:560px){
+    .modal{padding:28px 20px 32px;}
+  }
+
+  /* ---------- contact cta ---------- */
+  .cta{border-top:1px solid var(--line); padding:52px 0 60px;}
+  .cta-row{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;}
+  .cta-row h2{font-size:1.6rem; font-weight:600; max-width:18ch; line-height:1.25;}
+  .cta-links{display:flex; flex-direction:column; gap:10px; font-family:'IBM Plex Mono', monospace; font-size:0.92rem;}
+  .cta-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .cta-links a:hover{border-color:var(--accent); color:var(--accent);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:22px 0 40px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+  ::selection{background:var(--accent); color:var(--paper);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="cristina-portfolio.html">Cristina Velasco</a>
+    <a class="back-link" href="cristina-portfolio.html">← back to main work</a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h1>The rest of what I've built.</h1>
+    <p>One more workflow from the STI x TESDA AI Prompting for Automation program — the foundational trigger-to-action pattern that the projects on the main page build on.</p>
+  </div>
+</section>
+
+<section class="list">
+  <div class="wrap">
+
+    <div class="project" data-project="p4" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">PA/2.1</div>
+      <div>
+        <h3>File Upload Email Notification</h3>
+        <p class="desc">The simplest flow in the set — a new file lands in a OneDrive folder, and a notification email goes out automatically, no manual checking required.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed · Task Sheet 2.1</span>
+          <span class="tag">stack: <b>Power Automate, Outlook</b></span>
+          <span class="tag">learned: <b>the trigger → action → output pattern every flow builds on</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-row">
+      <h2>Open to data & automation roles.</h2>
+      <div class="cta-links">
+        <a href="mailto:macristinavelasco1222@gmail.com">macristinavelasco1222@gmail.com</a>
+        <a href="tel:+639052440573">0905 244 0573</a>
+        <a href="cristina-portfolio.html">back to main work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
+    <span>Cristina Velasco — Data Analyst & AI Automation</span>
+    <span>Quezon City, PH</span>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="id mono" id="modalId"></div>
+    <h3 id="modal-title"></h3>
+
+    <div class="modal-section-label">workflow</div>
+    <div class="workflow-viewer" id="workflowViewer">
+      <img id="modalImage" src="" alt="Workflow diagram" draggable="false">
+    </div>
+    <div class="workflow-hint">click the image to zoom in / out</div>
+
+    <div class="modal-section-label">how I built it</div>
+    <div class="how-list" id="modalHow"></div>
+  </div>
+</div>
+
+<script>
+  const projectData = {
+    p4: {
+      id: "PA/2.1",
+      title: "File Upload Email Notification",
+      image: "assets/workflow-p4.svg",
+      how: [
+        "Created an Automated Cloud Flow in Power Automate with the \"When a file is created\" trigger, pointed at a OneDrive for Business folder.",
+        "Added a \"Send an email (V2)\" action using Office 365 Outlook, with the subject \"File Uploaded.\"",
+        "Wrote a custom message body so the notification actually says what happened, instead of a generic alert.",
+        "Connected the trigger's output to the action so the flow fires automatically on every new upload.",
+        "Saved and tested the flow by uploading a file, then confirmed the notification email arrived."
+      ]
+    }
+  };
+
+  const overlay = document.getElementById('overlay');
+  const modalId = document.getElementById('modalId');
+  const modalTitle = document.getElementById('modal-title');
+  const workflowViewer = document.getElementById('workflowViewer');
+  const modalImage = document.getElementById('modalImage');
+  const modalHow = document.getElementById('modalHow');
+  let lastFocused = null;
+
+  function openModal(key){
+    const data = projectData[key];
+    if(!data) return;
+    modalId.textContent = data.id;
+    modalTitle.textContent = data.title;
+
+    modalImage.src = data.image;
+    modalImage.alt = `Workflow diagram for ${data.title}`;
+    workflowViewer.classList.remove('zoomed');
+    workflowViewer.scrollTop = 0;
+    workflowViewer.scrollLeft = 0;
+
+    modalHow.innerHTML = data.how.map(text => `<div class="how-item"><p>${text}</p></div>`).join('');
+
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modalClose').focus();
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    workflowViewer.classList.remove('zoomed');
+    if(lastFocused) lastFocused.focus();
+  }
+
+  modalImage.addEventListener('click', () => {
+    workflowViewer.classList.toggle('zoomed');
+  });
+
+  document.querySelectorAll('.project').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.project));
+    el.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openModal(el.dataset.project);
+      }
+    });
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+</script>
+
+</body>
+</html>

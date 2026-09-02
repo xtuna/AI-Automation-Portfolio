@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristina Velasco — Data Analyst & AI Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFEBE2;
+    --panel:#E5E0D2;
+    --ink:#1C1B18;
+    --ink-soft:#5B584F;
+    --line:#C9C1AC;
+    --accent:#2F5233;
+    --accent-soft:#3F6B46;
+    --amber:#9C6B2E;
+    --radius:3px;
+    --maxw:840px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  a{color:inherit;}
+
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.01em;}
+
+  /* ---------- header ---------- */
+  header{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  header .wrap{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  .brand{font-weight:600; font-size:1.05rem;}
+  .status-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    display:flex; align-items:center; gap:8px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 56px;}
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    align-items:stretch;
+    gap:48px;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.1rem);
+    font-weight:600;
+    line-height:1.15;
+    max-width:15ch;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-size:0.82rem;
+    color:var(--accent-soft);
+    margin-bottom:14px;
+  }
+  .hero p.lede{
+    margin-top:20px;
+    max-width:52ch;
+    font-size:1.08rem;
+    color:var(--ink-soft);
+  }
+  @media (max-width:760px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-diagram{
+      margin-top:40px;
+      border-top:1px solid var(--line);
+      padding-top:32px;
+      height:340px;
+    }
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:52px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:36px; flex-wrap:wrap; gap:8px;
+  }
+  .section-head h2{font-size:1.5rem; font-weight:600;}
+  .section-head .count{font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); font-size:0.85rem;}
+
+  /* ---------- projects ---------- */
+  .project{
+    padding:28px 16px;
+    margin:0 -16px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+    cursor:pointer;
+    border-radius:var(--radius);
+    transition:background 0.15s ease;
+  }
+  .project:first-of-type{border-top:none;}
+  .project:hover, .project:focus-visible{background:var(--panel);}
+  .project:focus-visible{outline:1px solid var(--accent); outline-offset:-1px;}
+  .project .open-hint{
+    margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--accent-soft);
+  }
+  .project .id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--accent);
+    padding-top:4px;
+  }
+  .project h3{font-size:1.25rem; font-weight:600; margin-bottom:8px;}
+  .project p.desc{color:var(--ink-soft); max-width:60ch;}
+  .project .meta{
+    margin-top:16px;
+    display:flex; flex-wrap:wrap; gap:10px 22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+  }
+  .project .meta .tag{color:var(--ink-soft);}
+  .project .meta .tag b{color:var(--ink); font-weight:500;}
+  .project .status{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  .project .status .sdot{width:6px; height:6px; border-radius:50%; background:var(--accent);}
+  .project .status.progress .sdot{background:var(--amber);}
+  @media (max-width:560px){
+    .project{grid-template-columns:1fr; gap:8px;}
+  }
+
+  /* ---------- approach ---------- */
+  .approach-list{display:flex; flex-direction:column;}
+  .approach-item{
+    padding:22px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:2fr 3fr;
+    gap:20px;
+  }
+  .approach-item:first-child{border-top:none;}
+  .approach-item h3{font-size:1.05rem; font-weight:600;}
+  .approach-item p{color:var(--ink-soft); max-width:56ch;}
+  @media (max-width:560px){
+    .approach-item{grid-template-columns:1fr; gap:6px;}
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px;}
+  .about-grid p{color:var(--ink-soft); max-width:56ch;}
+  .about-grid p + p{margin-top:14px;}
+  .skills{display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start;}
+  .skill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    padding:5px 10px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    color:var(--ink-soft);
+    background:var(--panel);
+  }
+  @media (max-width:640px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- contact ---------- */
+  .contact-row{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .contact-row h2{font-size:1.8rem; font-weight:600; max-width:18ch; line-height:1.25;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:'IBM Plex Mono', monospace; font-size:0.92rem;}
+  .contact-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .contact-links a:hover{border-color:var(--accent); color:var(--accent);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:22px 0 40px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  ::selection{background:var(--accent); color:var(--paper);}
+
+  /* ---------- workflow image viewer ---------- */
+  .workflow-viewer{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel);
+    overflow:auto;
+    max-height:340px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .workflow-viewer img{
+    display:block;
+    width:100%;
+    height:auto;
+    cursor:zoom-in;
+    transition:transform 0.2s ease;
+    transform-origin:center center;
+  }
+  .workflow-viewer.zoomed{
+    align-items:flex-start;
+    justify-content:flex-start;
+  }
+  .workflow-viewer.zoomed img{
+    width:200%;
+    max-width:none;
+    cursor:zoom-out;
+  }
+  .workflow-hint{
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.74rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(28,27,24,0.55);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:56px 20px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    max-width:700px;
+    width:100%;
+    padding:36px 36px 40px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute;
+    top:20px; right:20px;
+    width:32px; height:32px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel);
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    cursor:pointer;
+    line-height:1;
+  }
+  .modal-close:hover{border-color:var(--accent); color:var(--accent);}
+  .modal .id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--accent);
+  }
+  .modal h3{
+    font-size:1.5rem;
+    font-weight:600;
+    margin-top:6px;
+    padding-right:40px;
+  }
+  .modal .modal-section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin:30px 0 14px;
+  }
+  .modal .flow{margin-bottom:4px;}
+  .modal{max-width:760px;}
+  .how-list{counter-reset:step;}
+  .how-item{
+    counter-increment:step;
+    padding:14px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:28px 1fr;
+    gap:10px;
+  }
+  .how-item:first-child{border-top:none;}
+  .how-item::before{
+    content:counter(step);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--accent);
+  }
+  .how-item p{color:var(--ink-soft); font-size:0.95rem;}
+  @media (max-width:560px){
+    .modal{padding:28px 20px 32px;}
+  }
+
+  /* ---------- hero diagram ---------- */
+  .hero-diagram{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-diagram-panel{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-diagram svg{
+    width:100%;
+    height:100%;
+    display:block;
+    overflow:visible;
+  }
+  .hero-diagram .flow-pulse{
+    fill:none;
+    stroke:var(--accent);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-dasharray:14 86;
+    animation:flowPulse 2.6s linear infinite;
+  }
+  .hero-diagram .seg-2{ animation-delay:0.85s; }
+  .hero-diagram .seg-3{ animation-delay:1.7s; }
+  @keyframes flowPulse{
+    0%{stroke-dashoffset:100;}
+    100%{stroke-dashoffset:0;}
+  }
+  .hero-diagram .signal-dot.teal{fill:var(--accent);}
+  .hero-diagram .signal-dot.amber{fill:var(--amber);}
+  .hero-diagram .node-box{fill:var(--paper); stroke:var(--line);}
+  .hero-diagram .node-box.dark{fill:var(--ink); stroke:var(--ink);}
+  .hero-diagram .node-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    fill:var(--ink);
+  }
+  .hero-diagram .node-label.dark{fill:var(--paper);}
+  .hero-diagram .connector{
+    fill:none;
+    stroke:var(--line);
+    stroke-width:1.5;
+  }
+
+  /* ---------- see more link ---------- */
+  .see-more{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .see-more:hover{color:var(--accent); border-color:var(--accent);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Cristina Velasco</div>
+    <div class="status-line"><span class="dot"></span>open to data & automation roles</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow mono">Data Analyst · AI Automation</div>
+        <h1>I turn manual data work into workflows that run themselves.</h1>
+        <p class="lede">I come from a data analyst background — cleaning, validating, and reporting on data by hand. I've since been building AI automation skills on the side, learning to design the workflows that used to take me hours. These are a few of the ones I've built.</p>
+      </div>
+      <div class="hero-diagram">
+        <div class="hero-diagram-panel">
+        <svg viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow diagram: Trigger connects to Decide, Decide connects to AI agent, AI agent connects to Action">
+          <!-- static connectors -->
+          <path class="connector" d="M 220 92 H 360 V 230" />
+          <path class="connector" d="M 440 262 H 480" />
+          <path class="connector" d="M 560 294 V 432 H 440" />
+
+          <!-- animated flow pulses (same paths, normalized length) -->
+          <path class="flow-pulse seg-1" pathLength="100" d="M 220 92 H 360 V 230" />
+          <path class="flow-pulse seg-2" pathLength="100" d="M 440 262 H 480" />
+          <path class="flow-pulse seg-3" pathLength="100" d="M 560 294 V 432 H 440" />
+
+          <!-- signal dots at connection points -->
+          <circle class="signal-dot teal" cx="220" cy="92" r="4.5"/>
+          <circle class="signal-dot amber" cx="560" cy="432" r="4.5"/>
+
+          <!-- Trigger -->
+          <rect class="node-box" x="60" y="60" width="160" height="64" rx="3"/>
+          <text class="node-label" x="140" y="94" text-anchor="middle" dominant-baseline="middle">Trigger</text>
+
+          <!-- Decide -->
+          <rect class="node-box" x="280" y="230" width="160" height="64" rx="3"/>
+          <text class="node-label" x="360" y="264" text-anchor="middle" dominant-baseline="middle">Decide</text>
+
+          <!-- AI agent -->
+          <rect class="node-box dark" x="480" y="230" width="160" height="64" rx="3"/>
+          <text class="node-label dark" x="560" y="264" text-anchor="middle" dominant-baseline="middle">AI agent</text>
+
+          <!-- Action -->
+          <rect class="node-box" x="280" y="400" width="160" height="64" rx="3"/>
+          <text class="node-label" x="360" y="434" text-anchor="middle" dominant-baseline="middle">Action</text>
+        </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Work</h2>
+      <a class="see-more" href="other-works.html">see more →</a>
+    </div>
+
+    <div class="project" data-project="p1" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">AUTO/01</div>
+      <div>
+        <h3>Integrated AI Workflow — OCR + Sentiment Analysis</h3>
+        <p class="desc">An uploaded image gets its text extracted, that text is scored for sentiment, and both results land in a spreadsheet and an email — without anyone reading the image by hand.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Power Automate, AI Builder OCR, AI Builder Sentiment Analysis, Excel</b></span>
+          <span class="tag">outcome: <b>chained two AI actions into one flow</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+    <div class="project" data-project="p2" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">AUTO/02</div>
+      <div>
+        <h3>Event Registration &amp; Roster Builder</h3>
+        <p class="desc">Cleans up messy sign-up data on the way in — auto-formatting names and generating a unique registration ID — then emails each registrant a ready-to-use confirmation.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Power Automate, Forms, SharePoint, Expressions</b></span>
+          <span class="tag">outcome: <b>used expressions to clean data before it's saved</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+    <div class="project" data-project="p3" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">AUTO/03</div>
+      <div>
+        <h3>Equipment Request &amp; Approval Tracker</h3>
+        <p class="desc">Routes gear requests through an approval step before updating an inventory list — approved requests get a green light, denied ones get a clear no, and both update the tracker automatically.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Power Automate, SharePoint, Approvals, Conditional Logic</b></span>
+          <span class="tag">outcome: <b>built separate update-and-notify paths for each outcome</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How I work</h2>
+    </div>
+    <div class="approach-list">
+      <div class="approach-item">
+        <h3>Map trigger, action, and output first</h3>
+        <p>Before touching a tool, I write down what starts the workflow, what happens after, and what the final result should be — the same documentation habit from my data analyst work, applied to automation.</p>
+      </div>
+      <div class="approach-item">
+        <h3>Test it, then try to break it</h3>
+        <p>Every workflow I build, I also stress-test on purpose — missing steps, wrong sequencing, noisy output — so I know its actual failure points, not just its happy path.</p>
+      </div>
+      <div class="approach-item">
+        <h3>Always have a next improvement in mind</h3>
+        <p>A working flow isn't a finished flow. I keep a running list of what I'd add next — error handling, better filtering, smarter batching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm Cristina — a data analyst with a background in IT, now building AI automation skills on the side. My work has always been about turning raw, messy information into something usable; automation is just the next step of that, letting the workflow do the turning instead of me.</p>
+        <p>I like finding a manual, repetitive process and rebuilding it as something that runs on its own — that's what the projects on this page are.</p>
+      </div>
+      <div class="skills">
+        <span class="skill">Power Automate</span>
+        <span class="skill">Make</span>
+        <span class="skill">AI Builder (OCR)</span>
+        <span class="skill">AI Builder (Sentiment)</span>
+        <span class="skill">Excel</span>
+        <span class="skill">SQL</span>
+        <span class="skill">Google Sheets</span>
+        <span class="skill">Tableau</span>
+        <span class="skill">HTML / CSS</span>
+        <span class="skill">Figma</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-row">
+      <h2>Open to data & automation roles.</h2>
+      <div class="contact-links">
+        <a href="mailto:macristinavelasco1222@gmail.com">macristinavelasco1222@gmail.com</a>
+        <a href="tel:+639052440573">0905 244 0573</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
+    <span>Cristina Velasco — Data Analyst & AI Automation</span>
+    <span>Quezon City, PH</span>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="id mono" id="modalId"></div>
+    <h3 id="modal-title"></h3>
+
+    <div class="modal-section-label">workflow</div>
+    <div class="workflow-viewer" id="workflowViewer">
+      <img id="modalImage" src="" alt="Workflow diagram" draggable="false">
+    </div>
+    <div class="workflow-hint">click the image to zoom in / out</div>
+
+    <div class="modal-section-label">how I built it</div>
+    <div class="how-list" id="modalHow"></div>
+  </div>
+</div>
+
+<script>
+  const projectData = {
+    p1: {
+      id: "AUTO/01",
+      title: "Integrated AI Workflow — OCR + Sentiment Analysis",
+      image: "assets/workflow-p1.svg",
+      how: [
+        "Set the flow's trigger to fire whenever a new image lands in a monitored folder.",
+        "Added an OCR action that reads the image and pulls out any printed or handwritten text it finds.",
+        "Fed that extracted text into a sentiment analysis action, classifying it as positive, negative, neutral, or mixed.",
+        "Logged both the extracted text and the sentiment result as a new row in a spreadsheet, alongside the file name.",
+        "Added an email step so the extracted text and sentiment result get sent out as soon as the flow finishes running."
+      ]
+    },
+    p2: {
+      id: "AUTO/02",
+      title: "Event Registration & Roster Builder",
+      image: "assets/workflow-p2.svg",
+      how: [
+        "Set up a spreadsheet list to act as the roster, with a column specifically for a cleaned-up version of each registrant's name.",
+        "Built the sign-up form to intentionally allow messy input, since the automation would be responsible for cleaning it up.",
+        "Used a string expression to auto-capitalize the submitted name into consistent formatting before it gets saved.",
+        "Mapped the cleaned name, along with the rest of the form data, into the roster.",
+        "Added an email step that generates a random registration ID and sends each registrant an HTML confirmation ticket with their formatted name on it."
+      ]
+    },
+    p3: {
+      id: "AUTO/03",
+      title: "Equipment Request & Approval Tracker",
+      image: "assets/workflow-p3.svg",
+      how: [
+        "Built a tracker list with a status column that defaults to \"pending\" on every new entry.",
+        "Built a request form asking what's needed and when it'll be returned.",
+        "Set the flow to log every new submission into the tracker immediately, before any approval decision is made.",
+        "Added an approval step that routes the request to whoever manages the equipment, with an approve or reject decision.",
+        "Branched the flow with a condition: approved requests update the tracker and notify the requester; denied ones update the tracker differently and send a rejection notice instead."
+      ]
+    }
+  };
+
+  const overlay = document.getElementById('overlay');
+  const modalId = document.getElementById('modalId');
+  const modalTitle = document.getElementById('modal-title');
+  const workflowViewer = document.getElementById('workflowViewer');
+  const modalImage = document.getElementById('modalImage');
+  const modalHow = document.getElementById('modalHow');
+  let lastFocused = null;
+
+  function openModal(key){
+    const data = projectData[key];
+    if(!data) return;
+    modalId.textContent = data.id;
+    modalTitle.textContent = data.title;
+
+    modalImage.src = data.image;
+    modalImage.alt = `Workflow diagram for ${data.title}`;
+    workflowViewer.classList.remove('zoomed');
+    workflowViewer.scrollTop = 0;
+    workflowViewer.scrollLeft = 0;
+
+    modalHow.innerHTML = data.how.map(text => `<div class="how-item"><p>${text}</p></div>`).join('');
+
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modalClose').focus();
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    workflowViewer.classList.remove('zoomed');
+    if(lastFocused) lastFocused.focus();
+  }
+
+  modalImage.addEventListener('click', () => {
+    workflowViewer.classList.toggle('zoomed');
+  });
+
+  document.querySelectorAll('.project').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.project));
+    el.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openModal(el.dataset.project);
+      }
+    });
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+</script>
+
+</body>
+</html>
