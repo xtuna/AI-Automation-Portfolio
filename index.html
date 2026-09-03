@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cristina Velasco</title>
+<title>Cristina Velasco - AI Automation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,7 +35,6 @@
   }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
   a{color:inherit;}
-
   .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.01em;}
 
   /* ---------- header ---------- */
@@ -70,17 +69,17 @@
     align-items:stretch;
     gap:48px;
   }
+  .eyebrow{
+    font-size:0.82rem;
+    color:var(--accent-soft);
+    margin-bottom:14px;
+  }
   .hero h1{
     font-size:clamp(2.1rem, 5vw, 3.1rem);
     font-weight:600;
     line-height:1.15;
     max-width:15ch;
     letter-spacing:-0.01em;
-  }
-  .eyebrow{
-    font-size:0.82rem;
-    color:var(--accent-soft);
-    margin-bottom:14px;
   }
   .hero p.lede{
     margin-top:20px;
@@ -108,6 +107,18 @@
   .section-head h2{font-size:1.5rem; font-weight:600;}
   .section-head .count{font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); font-size:0.85rem;}
 
+  /* ---------- see more link ---------- */
+  .see-more{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .see-more:hover{color:var(--accent); border-color:var(--accent);}
+
   /* ---------- projects ---------- */
   .project{
     padding:28px 16px;
@@ -123,12 +134,6 @@
   .project:first-of-type{border-top:none;}
   .project:hover, .project:focus-visible{background:var(--panel);}
   .project:focus-visible{outline:1px solid var(--accent); outline-offset:-1px;}
-  .project .open-hint{
-    margin-top:14px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.76rem;
-    color:var(--accent-soft);
-  }
   .project .id{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.82rem;
@@ -151,7 +156,12 @@
     color:var(--ink-soft);
   }
   .project .status .sdot{width:6px; height:6px; border-radius:50%; background:var(--accent);}
-  .project .status.progress .sdot{background:var(--amber);}
+  .project .open-hint{
+    margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--accent-soft);
+  }
   @media (max-width:560px){
     .project{grid-template-columns:1fr; gap:8px;}
   }
@@ -215,34 +225,119 @@
 
   ::selection{background:var(--accent); color:var(--paper);}
 
-  /* ---------- workflow image viewer ---------- */
-  .workflow-viewer{
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    background:var(--panel);
-    overflow:auto;
-    max-height:340px;
+  /* ---------- hero diagram ---------- */
+  .hero-diagram{
     display:flex;
     align-items:center;
     justify-content:center;
   }
-  .workflow-viewer img{
+  .hero-diagram-panel{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-diagram svg{
+    width:100%;
+    height:100%;
+    display:block;
+    overflow:visible;
+  }
+  .hero-diagram .node-box{fill:var(--paper); stroke:var(--line);}
+  .hero-diagram .node-box.dark{fill:var(--ink); stroke:var(--ink);}
+  .hero-diagram .node-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    fill:var(--ink);
+  }
+  .hero-diagram .node-label.dark{fill:var(--paper);}
+  .hero-diagram .connector{
+    fill:none;
+    stroke:var(--line);
+    stroke-width:1.5;
+  }
+  .hero-diagram .flow-pulse{
+    fill:none;
+    stroke:var(--accent);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-dasharray:14 86;
+    animation:flowPulse 2.6s linear infinite;
+  }
+  .hero-diagram .seg-2{ animation-delay:0.85s; }
+  .hero-diagram .seg-3{ animation-delay:1.7s; }
+  @keyframes flowPulse{
+    0%{stroke-dashoffset:100;}
+    100%{stroke-dashoffset:0;}
+  }
+  .hero-diagram .signal-dot.teal{fill:var(--accent);}
+  .hero-diagram .signal-dot.amber{fill:var(--amber);}
+
+  /* ---------- workflow media viewer ---------- */
+  .workflow-viewer{
+    position:relative;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel);
+    overflow:hidden;
+  }
+  .media-stage{
+    width:100%;
+    max-height:340px;
+    overflow:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .media-stage img{
     display:block;
     width:100%;
     height:auto;
     cursor:zoom-in;
     transition:transform 0.2s ease;
-    transform-origin:center center;
   }
-  .workflow-viewer.zoomed{
+  .media-stage.zoomed{
     align-items:flex-start;
     justify-content:flex-start;
   }
-  .workflow-viewer.zoomed img{
+  .media-stage.zoomed img{
     width:200%;
     max-width:none;
     cursor:zoom-out;
   }
+  .media-stage video{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .media-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:34px; height:34px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--ink);
+    font-size:1.1rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .media-nav:hover{border-color:var(--accent); color:var(--accent);}
+  .media-nav.prev{left:10px;}
+  .media-nav.next{right:10px;}
+  .media-dots{
+    display:flex; justify-content:center; gap:6px; margin-top:10px;
+  }
+  .media-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--line);
+    cursor:pointer;
+    border:none; padding:0;
+  }
+  .media-dot.active{background:var(--accent);}
   .workflow-hint{
     margin-top:8px;
     font-family:'IBM Plex Mono', monospace;
@@ -266,7 +361,7 @@
     background:var(--paper);
     border:1px solid var(--line);
     border-radius:var(--radius);
-    max-width:700px;
+    max-width:760px;
     width:100%;
     padding:36px 36px 40px;
     position:relative;
@@ -302,8 +397,6 @@
     color:var(--ink-soft);
     margin:30px 0 14px;
   }
-  .modal .flow{margin-bottom:4px;}
-  .modal{max-width:760px;}
   .how-list{counter-reset:step;}
   .how-item{
     counter-increment:step;
@@ -324,67 +417,6 @@
   @media (max-width:560px){
     .modal{padding:28px 20px 32px;}
   }
-
-  /* ---------- hero diagram ---------- */
-  .hero-diagram{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .hero-diagram-panel{
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .hero-diagram svg{
-    width:100%;
-    height:100%;
-    display:block;
-    overflow:visible;
-  }
-  .hero-diagram .flow-pulse{
-    fill:none;
-    stroke:var(--accent);
-    stroke-width:2.5;
-    stroke-linecap:round;
-    stroke-dasharray:14 86;
-    animation:flowPulse 2.6s linear infinite;
-  }
-  .hero-diagram .seg-2{ animation-delay:0.85s; }
-  .hero-diagram .seg-3{ animation-delay:1.7s; }
-  @keyframes flowPulse{
-    0%{stroke-dashoffset:100;}
-    100%{stroke-dashoffset:0;}
-  }
-  .hero-diagram .signal-dot.teal{fill:var(--accent);}
-  .hero-diagram .signal-dot.amber{fill:var(--amber);}
-  .hero-diagram .node-box{fill:var(--paper); stroke:var(--line);}
-  .hero-diagram .node-box.dark{fill:var(--ink); stroke:var(--ink);}
-  .hero-diagram .node-label{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:16px;
-    fill:var(--ink);
-  }
-  .hero-diagram .node-label.dark{fill:var(--paper);}
-  .hero-diagram .connector{
-    fill:none;
-    stroke:var(--line);
-    stroke-width:1.5;
-  }
-
-  /* ---------- see more link ---------- */
-  .see-more{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.85rem;
-    color:var(--ink-soft);
-    text-decoration:none;
-    border-bottom:1px solid var(--line);
-    padding-bottom:2px;
-    transition:border-color 0.15s ease, color 0.15s ease;
-  }
-  .see-more:hover{color:var(--accent); border-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -402,7 +434,7 @@
       <div class="hero-text">
         <div class="eyebrow mono">Data Analyst · AI Automation</div>
         <h1>I turn manual data work into workflows that run themselves.</h1>
-        <p class="lede">I come from a data analyst background. I've since been building AI automation skills on the side, learning to design the workflows that used to take me hours. These are a few of the ones I've built.</p>
+        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it — designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
       </div>
       <div class="hero-diagram">
         <div class="hero-diagram-panel">
@@ -451,42 +483,42 @@
     </div>
 
     <div class="project" data-project="p1" tabindex="0" role="button" aria-haspopup="dialog">
-      <div class="id mono">AUTO/01</div>
+      <div class="id mono">AI/01</div>
       <div>
         <h3>Integrated AI Workflow — OCR + Sentiment Analysis</h3>
-        <p class="desc">An uploaded image gets its text extracted, that text is scored for sentiment, and both results land in a spreadsheet and an email — without anyone reading the image by hand.</p>
+        <p class="desc">An uploaded image gets its text extracted with OCR, that text is scored for sentiment, and both results land in a spreadsheet and an email — without anyone reading the image by hand.</p>
         <div class="meta">
           <span class="status"><span class="sdot"></span>completed</span>
           <span class="tag">stack: <b>Power Automate, AI Builder OCR, AI Builder Sentiment Analysis, Excel</b></span>
-          <span class="tag">outcome: <b>chained two AI actions into one flow</b></span>
+          <span class="tag">learned: <b>chaining two AI actions in one flow</b></span>
         </div>
         <div class="open-hint">view workflow →</div>
       </div>
     </div>
 
     <div class="project" data-project="p2" tabindex="0" role="button" aria-haspopup="dialog">
-      <div class="id mono">AUTO/02</div>
+      <div class="id mono">FLOW/02</div>
       <div>
-        <h3>Event Registration &amp; Roster Builder</h3>
-        <p class="desc">Cleans up messy sign-up data on the way in — auto-formatting names and generating a unique registration ID — then emails each registrant a ready-to-use confirmation.</p>
+        <h3>Equipment Approval & Inventory System</h3>
+        <p class="desc">A gear request form feeds an approval workflow — the request gets logged, an approval goes out automatically, and the record updates itself to approved or denied with a notification either way.</p>
         <div class="meta">
           <span class="status"><span class="sdot"></span>completed</span>
-          <span class="tag">stack: <b>Power Automate, Forms, SharePoint, Expressions</b></span>
-          <span class="tag">outcome: <b>used expressions to clean data before it's saved</b></span>
+          <span class="tag">stack: <b>Power Automate, Approvals, Microsoft Forms, SharePoint Lists</b></span>
+          <span class="tag">learned: <b>branching a flow to handle approve/deny cases differently</b></span>
         </div>
         <div class="open-hint">view workflow →</div>
       </div>
     </div>
 
     <div class="project" data-project="p3" tabindex="0" role="button" aria-haspopup="dialog">
-      <div class="id mono">AUTO/03</div>
+      <div class="id mono">FLOW/03</div>
       <div>
-        <h3>Equipment Request &amp; Approval Tracker</h3>
-        <p class="desc">Routes gear requests through an approval step before updating an inventory list — approved requests get a green light, denied ones get a clear no, and both update the tracker automatically.</p>
+        <h3>Event Registration & Ticket Generator</h3>
+        <p class="desc">A sign-up form feeds a roster automatically, cleans up messy name formatting on the way in, and emails each registrant an HTML confirmation ticket with a randomly generated ID.</p>
         <div class="meta">
           <span class="status"><span class="sdot"></span>completed</span>
-          <span class="tag">stack: <b>Power Automate, SharePoint, Approvals, Conditional Logic</b></span>
-          <span class="tag">outcome: <b>built separate update-and-notify paths for each outcome</b></span>
+          <span class="tag">stack: <b>Power Automate, Expressions, Microsoft Forms, SharePoint Lists</b></span>
+          <span class="tag">learned: <b>using inline expressions to clean and generate data mid-flow</b></span>
         </div>
         <div class="open-hint">view workflow →</div>
       </div>
@@ -502,7 +534,7 @@
     <div class="approach-list">
       <div class="approach-item">
         <h3>Map trigger, action, and output first</h3>
-        <p>Before touching a tool, I write down what starts the workflow, what happens after, and what the final result should be — the same documentation habit from my data analyst work, applied to automation.</p>
+        <p>Before touching a tool, I write down what starts the workflow, what happens after, and what the final result should be — the same documentation habit from data work, applied to automation.</p>
       </div>
       <div class="approach-item">
         <h3>Test it, then try to break it</h3>
@@ -523,14 +555,12 @@
     </div>
     <div class="about-grid">
       <div>
-        <p>I'm Cristina, a data analyst with a background in IT, now building AI automation skills on the side. My work has always been about turning raw, messy information into something usable; automation is just the next step of that, letting the workflow do the turning instead of me.</p>
-        <p>I like finding a manual, repetitive process and rebuilding it as something that runs on its own, that's what the projects on this page are.</p>
+        <p>I'm a data analyst who's expanded into AI automation — combining a background in data validation and reporting with hands-on workflow building. I focus on turning repetitive, manual processes into systems that run on their own.</p>
+        <p>Every project here started as a real scenario — a form that needed to feed a database, an approval that needed routing, a notification that needed to go out — solved with practical, no-code and low-code automation tools.</p>
       </div>
       <div class="skills">
         <span class="skill">Power Automate</span>
         <span class="skill">Make</span>
-        <span class="skill">AI Builder (OCR)</span>
-        <span class="skill">AI Builder (Sentiment)</span>
         <span class="skill">Excel</span>
         <span class="skill">SQL</span>
         <span class="skill">Google Sheets</span>
@@ -556,7 +586,7 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
-    <span>Cristina Velasco</span>
+    <span>Cristina Velasco - AI Automation</span>
     <span>Philippines</span>
   </div>
 </footer>
@@ -569,9 +599,12 @@
 
     <div class="modal-section-label">workflow</div>
     <div class="workflow-viewer" id="workflowViewer">
-      <img id="modalImage" src="" alt="Workflow diagram" draggable="false">
+      <button class="media-nav prev" id="mediaPrev" aria-label="Previous">‹</button>
+      <div class="media-stage" id="mediaStage"></div>
+      <button class="media-nav next" id="mediaNext" aria-label="Next">›</button>
     </div>
-    <div class="workflow-hint">click the image to zoom in / out</div>
+    <div class="media-dots" id="mediaDots"></div>
+    <div class="workflow-hint" id="workflowHint">click the image to zoom in / out</div>
 
     <div class="modal-section-label">how I built it</div>
     <div class="how-list" id="modalHow"></div>
@@ -579,41 +612,45 @@
 </div>
 
 <script>
+  // Each project's "media" is an array so a project can show more than one
+  // image (a swipeable slider) or a muted autoplay video instead of / alongside images.
+  // Example with a video: { type: "video", src: "assets/demo.mp4" }
+  // Example with multiple images: media: [ {type:"image", src:"a.png"}, {type:"image", src:"b.png"} ]
   const projectData = {
     p1: {
-      id: "AUTO/01",
+      id: "AI/01",
       title: "Integrated AI Workflow — OCR + Sentiment Analysis",
-      image: "assets/workflow-p1.svg",
+      media: [ { type: "image", src: "assets/workflow-p1.svg" } ],
       how: [
-        "Set the flow's trigger to fire whenever a new image lands in a monitored folder.",
-        "Added an OCR action that reads the image and pulls out any printed or handwritten text it finds.",
-        "Fed that extracted text into a sentiment analysis action, classifying it as positive, negative, neutral, or mixed.",
-        "Logged both the extracted text and the sentiment result as a new row in a spreadsheet, alongside the file name.",
-        "Added an email step so the extracted text and sentiment result get sent out as soon as the flow finishes running."
+        "Set up an automated flow triggered by a new file appearing in a monitored folder.",
+        "Added an OCR action, mapping the trigger's file content into the image field to extract text from the upload.",
+        "Added a sentiment analysis action, feeding it the extracted text to classify it as positive, negative, neutral, or mixed.",
+        "Created a spreadsheet with columns for the extracted text, sentiment result, and file name, then logged every result automatically.",
+        "Added an email step so the extracted text and sentiment result get sent out as soon as the flow runs."
       ]
     },
     p2: {
-      id: "AUTO/02",
-      title: "Event Registration & Roster Builder",
-      image: "assets/workflow-p2.svg",
+      id: "FLOW/02",
+      title: "Equipment Approval & Inventory System",
+      media: [ { type: "image", src: "assets/workflow-p2.svg" } ],
       how: [
-        "Set up a spreadsheet list to act as the roster, with a column specifically for a cleaned-up version of each registrant's name.",
-        "Built the sign-up form to intentionally allow messy input, since the automation would be responsible for cleaning it up.",
-        "Used a string expression to auto-capitalize the submitted name into consistent formatting before it gets saved.",
-        "Mapped the cleaned name, along with the rest of the form data, into the roster.",
-        "Added an email step that generates a random registration ID and sends each registrant an HTML confirmation ticket with their formatted name on it."
+        "Built a tracking list with columns for borrower name, item needed, return date, and approval status, defaulted to Pending.",
+        "Built a form asking for the requester's name, the item needed, and the return date.",
+        "Set the trigger to fire on form submission, then pulled the specific answers with a \"get response details\" step.",
+        "Created the list item first with status set to Pending, then added a \"start and wait for an approval\" step assigned to the person managing the equipment.",
+        "Added a condition step checking the approval outcome, branching to update the status to Approved or Denied and email the requester either way."
       ]
     },
     p3: {
-      id: "AUTO/03",
-      title: "Equipment Request & Approval Tracker",
-      image: "assets/workflow-p3.svg",
+      id: "FLOW/03",
+      title: "Event Registration & Ticket Generator",
+      media: [ { type: "image", src: "assets/workflow-p3.svg" } ],
       how: [
-        "Built a tracker list with a status column that defaults to \"pending\" on every new entry.",
-        "Built a request form asking what's needed and when it'll be returned.",
-        "Set the flow to log every new submission into the tracker immediately, before any approval decision is made.",
-        "Added an approval step that routes the request to whoever manages the equipment, with an approve or reject decision.",
-        "Branched the flow with a condition: approved requests update the tracker and notify the requester; denied ones update the tracker differently and send a rejection notice instead."
+        "Built a registration form asking for email, project name, and full name, plus a roster list to store the cleaned-up data.",
+        "Set the trigger to fire on form submission and pulled the response details.",
+        "Used a string expression to force the submitted name into clean, capitalized formatting before it gets stored anywhere.",
+        "Created the roster entry with the project title, email, and the formatted name mapped into their own columns.",
+        "Added an email step that builds an HTML confirmation ticket with the formatted name and a random registration ID generated inline."
       ]
     }
   };
@@ -621,10 +658,76 @@
   const overlay = document.getElementById('overlay');
   const modalId = document.getElementById('modalId');
   const modalTitle = document.getElementById('modal-title');
-  const workflowViewer = document.getElementById('workflowViewer');
-  const modalImage = document.getElementById('modalImage');
+  const mediaStage = document.getElementById('mediaStage');
+  const mediaPrev = document.getElementById('mediaPrev');
+  const mediaNext = document.getElementById('mediaNext');
+  const mediaDots = document.getElementById('mediaDots');
+  const workflowHint = document.getElementById('workflowHint');
   const modalHow = document.getElementById('modalHow');
   let lastFocused = null;
+  let currentMedia = [];
+  let currentMediaIndex = 0;
+
+  function renderMediaItem(){
+    const item = currentMedia[currentMediaIndex];
+    if(!item) return;
+    mediaStage.classList.remove('zoomed');
+    mediaStage.innerHTML = '';
+    if(item.type === 'video'){
+      const v = document.createElement('video');
+      v.src = item.src;
+      v.autoplay = true;
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.controls = true;
+      mediaStage.appendChild(v);
+      workflowHint.textContent = 'video plays automatically, without sound';
+    } else {
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = 'Workflow diagram';
+      img.draggable = false;
+      img.addEventListener('click', () => mediaStage.classList.toggle('zoomed'));
+      mediaStage.appendChild(img);
+      workflowHint.textContent = 'click the image to zoom in / out';
+    }
+  }
+
+  function renderDots(){
+    mediaDots.innerHTML = '';
+    if(currentMedia.length <= 1){
+      mediaDots.style.display = 'none';
+      mediaPrev.style.display = 'none';
+      mediaNext.style.display = 'none';
+      return;
+    }
+    mediaDots.style.display = 'flex';
+    mediaPrev.style.display = 'flex';
+    mediaNext.style.display = 'flex';
+    currentMedia.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'media-dot' + (i === currentMediaIndex ? ' active' : '');
+      dot.setAttribute('aria-label', `Show item ${i + 1}`);
+      dot.addEventListener('click', () => {
+        currentMediaIndex = i;
+        renderMediaItem();
+        renderDots();
+      });
+      mediaDots.appendChild(dot);
+    });
+  }
+
+  mediaPrev.addEventListener('click', () => {
+    currentMediaIndex = (currentMediaIndex - 1 + currentMedia.length) % currentMedia.length;
+    renderMediaItem();
+    renderDots();
+  });
+  mediaNext.addEventListener('click', () => {
+    currentMediaIndex = (currentMediaIndex + 1) % currentMedia.length;
+    renderMediaItem();
+    renderDots();
+  });
 
   function openModal(key){
     const data = projectData[key];
@@ -632,11 +735,10 @@
     modalId.textContent = data.id;
     modalTitle.textContent = data.title;
 
-    modalImage.src = data.image;
-    modalImage.alt = `Workflow diagram for ${data.title}`;
-    workflowViewer.classList.remove('zoomed');
-    workflowViewer.scrollTop = 0;
-    workflowViewer.scrollLeft = 0;
+    currentMedia = data.media;
+    currentMediaIndex = 0;
+    renderMediaItem();
+    renderDots();
 
     modalHow.innerHTML = data.how.map(text => `<div class="how-item"><p>${text}</p></div>`).join('');
 
@@ -649,13 +751,9 @@
   function closeModal(){
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-    workflowViewer.classList.remove('zoomed');
+    mediaStage.innerHTML = '';
     if(lastFocused) lastFocused.focus();
   }
-
-  modalImage.addEventListener('click', () => {
-    workflowViewer.classList.toggle('zoomed');
-  });
 
   document.querySelectorAll('.project').forEach(el => {
     el.addEventListener('click', () => openModal(el.dataset.project));
