@@ -106,7 +106,6 @@
     color:var(--ink-soft);
   }
   .project .status .sdot{width:6px; height:6px; border-radius:50%; background:var(--accent);}
-  .project .status.progress .sdot{background:var(--amber);}
   .project .open-hint{
     margin-top:14px;
     font-family:'IBM Plex Mono', monospace;
@@ -117,34 +116,70 @@
     .project{grid-template-columns:1fr; gap:8px;}
   }
 
-  /* ---------- workflow image viewer ---------- */
+  /* ---------- workflow media viewer ---------- */
   .workflow-viewer{
+    position:relative;
     border:1px solid var(--line);
     border-radius:var(--radius);
     background:var(--panel);
-    overflow:auto;
+    overflow:hidden;
+  }
+  .media-stage{
+    width:100%;
     max-height:340px;
+    overflow:auto;
     display:flex;
     align-items:center;
     justify-content:center;
   }
-  .workflow-viewer img{
+  .media-stage img{
     display:block;
     width:100%;
     height:auto;
     cursor:zoom-in;
     transition:transform 0.2s ease;
-    transform-origin:center center;
   }
-  .workflow-viewer.zoomed{
+  .media-stage.zoomed{
     align-items:flex-start;
     justify-content:flex-start;
   }
-  .workflow-viewer.zoomed img{
+  .media-stage.zoomed img{
     width:200%;
     max-width:none;
     cursor:zoom-out;
   }
+  .media-stage video{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .media-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:34px; height:34px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--ink);
+    font-size:1.1rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .media-nav:hover{border-color:var(--accent); color:var(--accent);}
+  .media-nav.prev{left:10px;}
+  .media-nav.next{right:10px;}
+  .media-dots{
+    display:flex; justify-content:center; gap:6px; margin-top:10px;
+  }
+  .media-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--line);
+    cursor:pointer;
+    border:none; padding:0;
+  }
+  .media-dot.active{background:var(--accent);}
   .workflow-hint{
     margin-top:8px;
     font-family:'IBM Plex Mono', monospace;
@@ -261,7 +296,7 @@
 <section class="intro">
   <div class="wrap">
     <h1>The rest of what I've built.</h1>
-    <p>One more workflow from the STI x TESDA AI Prompting for Automation program — the foundational trigger-to-action pattern that the projects on the main page build on.</p>
+    <p>More automated workflows — form-to-database pipelines, conditional routing, and notification systems. Click any project to see the workflow and how it was built.</p>
   </div>
 </section>
 
@@ -269,14 +304,70 @@
   <div class="wrap">
 
     <div class="project" data-project="p4" tabindex="0" role="button" aria-haspopup="dialog">
-      <div class="id mono">PA/2.1</div>
+      <div class="id mono">AI/04</div>
+      <div>
+        <h3>Image Text Extraction with AI Builder</h3>
+        <p class="desc">Any image uploaded to a folder gets scanned with OCR, and the extracted text is emailed automatically — handy for scanned notes, receipts, or handwritten forms.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Power Automate, AI Builder Text Recognition, Outlook</b></span>
+          <span class="tag">learned: <b>OCR accuracy depends heavily on image quality</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+    <div class="project" data-project="p5" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">FLOW/05</div>
+      <div>
+        <h3>Automated Weather Logger</h3>
+        <p class="desc">Pulls live weather data and logs it as a new row in a spreadsheet — the start of a historical log that builds itself over time instead of being copied in by hand.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Make, Google Sheets</b></span>
+          <span class="tag">learned: <b>a module-based scenario builder as an alternative approach to automation</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+    <div class="project" data-project="p6" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">FLOW/06</div>
       <div>
         <h3>File Upload Email Notification</h3>
-        <p class="desc">The simplest flow in the set — a new file lands in a OneDrive folder, and a notification email goes out automatically, no manual checking required.</p>
+        <p class="desc">The simplest flow in the set — a new file lands in a folder, and a notification email goes out automatically, no manual checking required.</p>
         <div class="meta">
-          <span class="status"><span class="sdot"></span>completed · Task Sheet 2.1</span>
+          <span class="status"><span class="sdot"></span>completed</span>
           <span class="tag">stack: <b>Power Automate, Outlook</b></span>
           <span class="tag">learned: <b>the trigger → action → output pattern every flow builds on</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+    <div class="project" data-project="p7" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">FLOW/07</div>
+      <div>
+        <h3>Form-to-Database Data Entry Pipeline</h3>
+        <p class="desc">A survey form feeds directly into a structured list — every submission is captured and written to the database automatically, with no manual copy-pasting.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Power Automate, Microsoft Forms, SharePoint Lists</b></span>
+          <span class="tag">learned: <b>matching form field types to database column types to avoid flow errors</b></span>
+        </div>
+        <div class="open-hint">view workflow →</div>
+      </div>
+    </div>
+
+    <div class="project" data-project="p8" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="id mono">FLOW/08</div>
+      <div>
+        <h3>Conditional IT Support Ticket Router</h3>
+        <p class="desc">Incoming tech issue reports get logged automatically, and anything marked urgent triggers an immediate alert email — routine issues are just quietly logged for later.</p>
+        <div class="meta">
+          <span class="status"><span class="sdot"></span>completed</span>
+          <span class="tag">stack: <b>Power Automate, Microsoft Forms, SharePoint Lists, Conditional Logic</b></span>
+          <span class="tag">learned: <b>routing one flow down two different paths based on a single answer</b></span>
         </div>
         <div class="open-hint">view workflow →</div>
       </div>
@@ -300,7 +391,7 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
-    <span>Cristina Velasco</span>
+    <span>Cristina Velasco - AI Automation</span>
     <span>Philippines</span>
   </div>
 </footer>
@@ -313,9 +404,12 @@
 
     <div class="modal-section-label">workflow</div>
     <div class="workflow-viewer" id="workflowViewer">
-      <img id="modalImage" src="" alt="Workflow diagram" draggable="false">
+      <button class="media-nav prev" id="mediaPrev" aria-label="Previous">‹</button>
+      <div class="media-stage" id="mediaStage"></div>
+      <button class="media-nav next" id="mediaNext" aria-label="Next">›</button>
     </div>
-    <div class="workflow-hint">click the image to zoom in / out</div>
+    <div class="media-dots" id="mediaDots"></div>
+    <div class="workflow-hint" id="workflowHint">click the image to zoom in / out</div>
 
     <div class="modal-section-label">how I built it</div>
     <div class="how-list" id="modalHow"></div>
@@ -323,17 +417,69 @@
 </div>
 
 <script>
+  // Each project's "media" is an array so a project can show more than one
+  // image (a swipeable slider) or a muted autoplay video instead of / alongside images.
+  // Example with a video: { type: "video", src: "assets/demo.mp4" }
+  // Example with multiple images: media: [ {type:"image", src:"a.png"}, {type:"image", src:"b.png"} ]
   const projectData = {
     p4: {
-      id: "PA/2.1",
-      title: "File Upload Email Notification",
-      image: "assets/workflow-p4.svg",
+      id: "AI/04",
+      title: "Image Text Extraction with AI Builder",
+      media: [ { type: "image", src: "assets/workflow-p4.svg" } ],
       how: [
-        "Created an Automated Cloud Flow in Power Automate with the \"When a file is created\" trigger, pointed at a OneDrive for Business folder.",
-        "Added a \"Send an email (V2)\" action using Office 365 Outlook, with the subject \"File Uploaded.\"",
+        "Created an automated flow triggered by a new file appearing in a monitored folder.",
+        "Added an OCR action and mapped the uploaded file's content into the image field to extract its text.",
+        "Added an email action and inserted the extracted text as dynamic content into the message body.",
+        "Connected the trigger to the action and tested the flow by uploading a sample image with text.",
+        "Confirmed the flow worked by receiving an email with the text accurately pulled from the image."
+      ]
+    },
+    p5: {
+      id: "FLOW/05",
+      title: "Automated Weather Logger",
+      media: [ { type: "image", src: "assets/workflow-p5.svg" } ],
+      how: [
+        "Created a scenario and added a \"get current weather\" module as the starting point, since this workflow runs on demand rather than an external trigger.",
+        "Set up a blank spreadsheet to store the logged weather data.",
+        "Added a \"add a row\" module, connected my account, and pointed it to the new spreadsheet.",
+        "Mapped the weather module's output — sunrise, temperature, status, and description — into their own columns.",
+        "Ran the scenario once to test it, then confirmed a new row appeared with the current weather data."
+      ]
+    },
+    p6: {
+      id: "FLOW/06",
+      title: "File Upload Email Notification",
+      media: [ { type: "image", src: "assets/workflow-p6.svg" } ],
+      how: [
+        "Created an automated flow with a \"when a file is created\" trigger, pointed at a monitored folder.",
+        "Added a \"send an email\" action with the subject \"File Uploaded.\"",
         "Wrote a custom message body so the notification actually says what happened, instead of a generic alert.",
         "Connected the trigger's output to the action so the flow fires automatically on every new upload.",
         "Saved and tested the flow by uploading a file, then confirmed the notification email arrived."
+      ]
+    },
+    p7: {
+      id: "FLOW/07",
+      title: "Form-to-Database Data Entry Pipeline",
+      media: [ { type: "image", src: "assets/workflow-p7.svg" } ],
+      how: [
+        "Built the destination first — a structured list with columns matching exactly what the form would collect.",
+        "Built a form with matching questions so every field had somewhere to land.",
+        "Set the trigger to fire on form submission and added a \"get response details\" step to pull the specific answers.",
+        "Added a \"create item\" action and mapped each form answer to its matching column using dynamic content.",
+        "Tested by submitting the form and confirming the new row appeared automatically within seconds."
+      ]
+    },
+    p8: {
+      id: "FLOW/08",
+      title: "Conditional IT Support Ticket Router",
+      media: [ { type: "image", src: "assets/workflow-p8.svg" } ],
+      how: [
+        "Built a ticket form asking what's wrong and whether it's stopping the person's work right now.",
+        "Set the trigger to fire on submission and logged every report as a ticket, mapping the yes/no answer to an urgency level.",
+        "Added a condition step checking whether the urgency answer was \"Yes.\"",
+        "On the \"Yes\" branch, added an email step that immediately alerts the right person with the issue details.",
+        "Left the \"No\" branch empty — routine issues just stay logged without triggering a notification."
       ]
     }
   };
@@ -341,10 +487,76 @@
   const overlay = document.getElementById('overlay');
   const modalId = document.getElementById('modalId');
   const modalTitle = document.getElementById('modal-title');
-  const workflowViewer = document.getElementById('workflowViewer');
-  const modalImage = document.getElementById('modalImage');
+  const mediaStage = document.getElementById('mediaStage');
+  const mediaPrev = document.getElementById('mediaPrev');
+  const mediaNext = document.getElementById('mediaNext');
+  const mediaDots = document.getElementById('mediaDots');
+  const workflowHint = document.getElementById('workflowHint');
   const modalHow = document.getElementById('modalHow');
   let lastFocused = null;
+  let currentMedia = [];
+  let currentMediaIndex = 0;
+
+  function renderMediaItem(){
+    const item = currentMedia[currentMediaIndex];
+    if(!item) return;
+    mediaStage.classList.remove('zoomed');
+    mediaStage.innerHTML = '';
+    if(item.type === 'video'){
+      const v = document.createElement('video');
+      v.src = item.src;
+      v.autoplay = true;
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.controls = true;
+      mediaStage.appendChild(v);
+      workflowHint.textContent = 'video plays automatically, without sound';
+    } else {
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = 'Workflow diagram';
+      img.draggable = false;
+      img.addEventListener('click', () => mediaStage.classList.toggle('zoomed'));
+      mediaStage.appendChild(img);
+      workflowHint.textContent = 'click the image to zoom in / out';
+    }
+  }
+
+  function renderDots(){
+    mediaDots.innerHTML = '';
+    if(currentMedia.length <= 1){
+      mediaDots.style.display = 'none';
+      mediaPrev.style.display = 'none';
+      mediaNext.style.display = 'none';
+      return;
+    }
+    mediaDots.style.display = 'flex';
+    mediaPrev.style.display = 'flex';
+    mediaNext.style.display = 'flex';
+    currentMedia.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'media-dot' + (i === currentMediaIndex ? ' active' : '');
+      dot.setAttribute('aria-label', `Show item ${i + 1}`);
+      dot.addEventListener('click', () => {
+        currentMediaIndex = i;
+        renderMediaItem();
+        renderDots();
+      });
+      mediaDots.appendChild(dot);
+    });
+  }
+
+  mediaPrev.addEventListener('click', () => {
+    currentMediaIndex = (currentMediaIndex - 1 + currentMedia.length) % currentMedia.length;
+    renderMediaItem();
+    renderDots();
+  });
+  mediaNext.addEventListener('click', () => {
+    currentMediaIndex = (currentMediaIndex + 1) % currentMedia.length;
+    renderMediaItem();
+    renderDots();
+  });
 
   function openModal(key){
     const data = projectData[key];
@@ -352,11 +564,10 @@
     modalId.textContent = data.id;
     modalTitle.textContent = data.title;
 
-    modalImage.src = data.image;
-    modalImage.alt = `Workflow diagram for ${data.title}`;
-    workflowViewer.classList.remove('zoomed');
-    workflowViewer.scrollTop = 0;
-    workflowViewer.scrollLeft = 0;
+    currentMedia = data.media;
+    currentMediaIndex = 0;
+    renderMediaItem();
+    renderDots();
 
     modalHow.innerHTML = data.how.map(text => `<div class="how-item"><p>${text}</p></div>`).join('');
 
@@ -369,13 +580,9 @@
   function closeModal(){
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-    workflowViewer.classList.remove('zoomed');
+    mediaStage.innerHTML = '';
     if(lastFocused) lastFocused.focus();
   }
-
-  modalImage.addEventListener('click', () => {
-    workflowViewer.classList.toggle('zoomed');
-  });
 
   document.querySelectorAll('.project').forEach(el => {
     el.addEventListener('click', () => openModal(el.dataset.project));
