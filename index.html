@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cristina Velasco - AI Automation</title>
+<title>Cristina Velasco — AI Automation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -200,6 +200,128 @@
     .about-grid{grid-template-columns:1fr;}
   }
 
+  /* ---------- certifications carousel ---------- */
+  .cert-carousel-wrap{position:relative;}
+  .cert-track{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding:4px 4px 10px;
+    margin:0 -4px;
+  }
+  .cert-track::-webkit-scrollbar{display:none;}
+  .cert-card{
+    flex:0 0 auto;
+    width:220px;
+    scroll-snap-align:start;
+    cursor:pointer;
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    background:var(--paper);
+    transition:border-color 0.15s ease;
+  }
+  .cert-card:hover, .cert-card:focus-visible{border-color:var(--accent);}
+  .cert-card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    display:block;
+    border-bottom:1px solid var(--line);
+    background:var(--panel);
+  }
+  .cert-card-body{padding:12px 14px 14px;}
+  .cert-card-name{font-weight:600; font-size:0.92rem; line-height:1.3;}
+  .cert-card-issuer{
+    margin-top:4px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--ink-soft);
+  }
+  .cert-card-status{
+    margin-top:10px;
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+  .cert-card-status .sdot{width:6px; height:6px; border-radius:50%; background:var(--accent);}
+  .cert-card-status.upcoming .sdot{background:var(--amber);}
+  .cert-card.upcoming{
+    cursor:default;
+    border-style:dashed;
+  }
+  .cert-card.upcoming:hover{border-color:var(--line);}
+  .cert-card-placeholder{
+    width:100%;
+    height:140px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--panel);
+    border-bottom:1px dashed var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    text-align:center;
+    padding:0 16px;
+  }
+  .cert-nav{
+    position:absolute;
+    top:calc(50% - 12px);
+    transform:translateY(-50%);
+    width:34px; height:34px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--ink);
+    font-size:1.1rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .cert-nav:hover{border-color:var(--accent); color:var(--accent);}
+  .cert-nav.prev{left:-14px;}
+  .cert-nav.next{right:-14px;}
+  @media (max-width:640px){
+    .cert-nav{display:none;}
+  }
+  .cert-dots{display:flex; justify-content:center; gap:6px; margin-top:14px;}
+  .cert-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--line);
+    border:none; padding:0;
+    cursor:pointer;
+  }
+  .cert-dot.active{background:var(--accent);}
+
+  /* ---------- certificate lightbox ---------- */
+  .cert-modal img{
+    display:block;
+    width:100%;
+    height:auto;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+  .cert-modal .cert-modal-issuer{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .cert-view-link{
+    display:inline-block;
+    margin-top:18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    color:var(--ink);
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .cert-view-link:hover{color:var(--accent); border-color:var(--accent);}
   /* ---------- contact ---------- */
   .contact-row{
     display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
@@ -434,7 +556,7 @@
       <div class="hero-text">
         <div class="eyebrow mono">Data Analyst · AI Automation</div>
         <h1>I turn manual data work into workflows that run themselves.</h1>
-        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it — designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
+        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it, designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
       </div>
       <div class="hero-diagram">
         <div class="hero-diagram-panel">
@@ -561,6 +683,8 @@
       <div class="skills">
         <span class="skill">Power Automate</span>
         <span class="skill">Make</span>
+        <span class="skill">AI Builder (OCR)</span>
+        <span class="skill">AI Builder (Sentiment)</span>
         <span class="skill">Excel</span>
         <span class="skill">SQL</span>
         <span class="skill">Google Sheets</span>
@@ -569,6 +693,65 @@
         <span class="skill">Figma</span>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-carousel-wrap">
+      <button class="cert-nav prev" id="certPrev" aria-label="Previous">‹</button>
+      <div class="cert-track" id="certTrack">
+        <div class="cert-card" data-cert="c1" tabindex="0" role="button" aria-haspopup="dialog">
+          <img src="assets/certs/cert-ai-ready-asean.png" alt="AI Ready ASEAN certificate">
+          <div class="cert-card-body">
+            <div class="cert-card-name">AI Learning Modules</div>
+            <div class="cert-card-issuer">AI Ready ASEAN</div>
+            <div class="cert-card-status"><span class="sdot"></span>completed</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert="c2" tabindex="0" role="button" aria-haspopup="dialog">
+          <img src="assets/certs/cert-openai-academy.png" alt="OpenAI Academy certificate">
+          <div class="cert-card-body">
+            <div class="cert-card-name">Apply AI at Work — Pathway</div>
+            <div class="cert-card-issuer">OpenAI Academy</div>
+            <div class="cert-card-status"><span class="sdot"></span>completed</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert="c3" tabindex="0" role="button" aria-haspopup="dialog">
+          <img src="assets/certs/cert-ibm-skillsbuild.png" alt="IBM SkillsBuild certificate">
+          <div class="cert-card-body">
+            <div class="cert-card-name">Getting Started with Generative AI</div>
+            <div class="cert-card-issuer">IBM SkillsBuild</div>
+            <div class="cert-card-status"><span class="sdot"></span>completed</div>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert="c4" tabindex="0" role="button" aria-haspopup="dialog">
+          <img src="assets/certs/cert-oracle.png" alt="Oracle certificate">
+          <div class="cert-card-body">
+            <div class="cert-card-name">Agentic AI Foundations Associate</div>
+            <div class="cert-card-issuer">Oracle University</div>
+            <div class="cert-card-status"><span class="sdot"></span>completed</div>
+          </div>
+        </div>
+
+        <div class="cert-card upcoming">
+          <div class="cert-card-placeholder">certificate not yet issued</div>
+          <div class="cert-card-body">
+            <div class="cert-card-name">Microsoft Azure Certification</div>
+            <div class="cert-card-issuer">Microsoft</div>
+            <div class="cert-card-status upcoming"><span class="sdot"></span>in progress</div>
+          </div>
+        </div>
+      </div>
+      <button class="cert-nav next" id="certNext" aria-label="Next">›</button>
+    </div>
+    <div class="cert-dots" id="certDots"></div>
   </div>
 </section>
 
@@ -586,7 +769,7 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
-    <span>Cristina Velasco - AI Automation</span>
+    <span>Cristina Velasco — AI Automation</span>
     <span>Philippines</span>
   </div>
 </footer>
@@ -611,6 +794,16 @@
   </div>
 </div>
 
+<div class="overlay" id="certOverlay" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+  <div class="modal cert-modal">
+    <button class="modal-close" id="certModalClose" aria-label="Close">×</button>
+    <img id="certModalImage" src="" alt="Certificate">
+    <h3 id="cert-modal-title"></h3>
+    <div class="cert-modal-issuer" id="certModalIssuer"></div>
+    <a class="cert-view-link" id="certModalLink" href="#" target="_blank" rel="noopener">View certificate ↗</a>
+  </div>
+</div>
+
 <script>
   // Each project's "media" is an array so a project can show more than one
   // image (a swipeable slider) or a muted autoplay video instead of / alongside images.
@@ -620,10 +813,7 @@
     p1: {
       id: "AI/01",
       title: "Integrated AI Workflow — OCR + Sentiment Analysis",
-      media: [
-        { type: "image", src: "assets/workflow-1.jpg" },
-        { type: "video", src: "assets/workflow-1.mp4" }
-      ],
+      media: [ { type: "image", src: "assets/workflow-p1.svg" } ],
       how: [
         "Set up an automated flow triggered by a new file appearing in a monitored folder.",
         "Added an OCR action, mapping the trigger's file content into the image field to extract text from the upload.",
@@ -635,10 +825,7 @@
     p2: {
       id: "FLOW/02",
       title: "Equipment Approval & Inventory System",
-      media: [
-        { type: "image", src: "assets/workflow-2.jpg" },
-        { type: "video", src: "assets/workflow-2.mp4" }
-      ],
+      media: [ { type: "image", src: "assets/workflow-p2.svg" } ],
       how: [
         "Built a tracking list with columns for borrower name, item needed, return date, and approval status, defaulted to Pending.",
         "Built a form asking for the requester's name, the item needed, and the return date.",
@@ -650,10 +837,7 @@
     p3: {
       id: "FLOW/03",
       title: "Event Registration & Ticket Generator",
-      media: [
-        { type: "image", src: "assets/workflow-3.jpg" },
-        { type: "video", src: "assets/workflow-3.mp4" }
-      ],
+      media: [ { type: "image", src: "assets/workflow-p3.svg" } ],
       how: [
         "Built a registration form asking for email, project name, and full name, plus a roster list to store the cleaned-up data.",
         "Set the trigger to fire on form submission and pulled the response details.",
@@ -778,6 +962,127 @@
   overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  // ---------- Certifications carousel + lightbox ----------
+  const certData = {
+    c1: {
+      name: "AI Learning Modules",
+      issuer: "AI Ready ASEAN — ASEAN Foundation",
+      image: "assets/certs/cert-ai-ready-asean.png",
+      link: "assets/certs/cert-ai-ready-asean.png"
+    },
+    c2: {
+      name: "Apply AI at Work — Pathway Completion",
+      issuer: "OpenAI Academy",
+      image: "assets/certs/cert-openai-academy.png",
+      link: "assets/certs/cert-openai-academy.png"
+    },
+    c3: {
+      name: "Getting Started with Generative AI",
+      issuer: "IBM SkillsBuild",
+      image: "assets/certs/cert-ibm-skillsbuild.png",
+      link: "https://www.credly.com/go/jJQ9dYus"
+    },
+    c4: {
+      name: "Agentic AI Foundations Associate",
+      issuer: "Oracle University",
+      image: "assets/certs/cert-oracle.png",
+      link: "assets/certs/cert-oracle.png"
+    }
+  };
+
+  const certTrack = document.getElementById('certTrack');
+  const certPrev = document.getElementById('certPrev');
+  const certNext = document.getElementById('certNext');
+  const certDots = document.getElementById('certDots');
+  const certOverlay = document.getElementById('certOverlay');
+  const certModalImage = document.getElementById('certModalImage');
+  const certModalTitle = document.getElementById('cert-modal-title');
+  const certModalIssuer = document.getElementById('certModalIssuer');
+  const certModalLink = document.getElementById('certModalLink');
+  let certLastFocused = null;
+
+  function openCertModal(key){
+    const data = certData[key];
+    if(!data) return;
+    certModalImage.src = data.image;
+    certModalImage.alt = data.name;
+    certModalTitle.textContent = data.name;
+    certModalIssuer.textContent = data.issuer;
+    certModalLink.href = data.link;
+
+    certLastFocused = document.activeElement;
+    certOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('certModalClose').focus();
+  }
+
+  function closeCertModal(){
+    certOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if(certLastFocused) certLastFocused.focus();
+  }
+
+  document.querySelectorAll('.cert-card[data-cert]').forEach(el => {
+    el.addEventListener('click', () => openCertModal(el.dataset.cert));
+    el.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openCertModal(el.dataset.cert);
+      }
+    });
+  });
+
+  document.getElementById('certModalClose').addEventListener('click', closeCertModal);
+  certOverlay.addEventListener('click', (e) => { if(e.target === certOverlay) closeCertModal(); });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && certOverlay.classList.contains('open')) closeCertModal();
+  });
+
+  // Carousel scroll + dots
+  const certCards = Array.from(certTrack.children);
+  function buildCertDots(){
+    certDots.innerHTML = '';
+    certCards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'cert-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Scroll to certificate ${i + 1}`);
+      dot.addEventListener('click', () => {
+        certCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+      certDots.appendChild(dot);
+    });
+  }
+  buildCertDots();
+
+  function updateActiveDot(){
+    const trackLeft = certTrack.scrollLeft;
+    let closestIndex = 0;
+    let closestDist = Infinity;
+    certCards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - trackLeft);
+      if(dist < closestDist){ closestDist = dist; closestIndex = i; }
+    });
+    Array.from(certDots.children).forEach((dot, i) => {
+      dot.classList.toggle('active', i === closestIndex);
+    });
+  }
+  certTrack.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateActiveDot);
+  });
+
+  function certScrollAmount(){
+    const card = certCards[0];
+    const style = getComputedStyle(certTrack);
+    const gap = parseFloat(style.gap) || 20;
+    return card.offsetWidth + gap;
+  }
+  certPrev.addEventListener('click', () => {
+    certTrack.scrollBy({ left: -certScrollAmount(), behavior: 'smooth' });
+  });
+  certNext.addEventListener('click', () => {
+    certTrack.scrollBy({ left: certScrollAmount(), behavior: 'smooth' });
   });
 </script>
 
