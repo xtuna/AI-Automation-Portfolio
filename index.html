@@ -287,15 +287,6 @@
   @media (max-width:640px){
     .cert-nav{display:none;}
   }
-  .cert-dots{display:flex; justify-content:center; gap:6px; margin-top:14px;}
-  .cert-dot{
-    width:6px; height:6px; border-radius:50%;
-    background:var(--line);
-    border:none; padding:0;
-    cursor:pointer;
-  }
-  .cert-dot.active{background:var(--accent);}
-
   /* ---------- certificate lightbox ---------- */
   .cert-modal img{
     display:block;
@@ -556,7 +547,7 @@
       <div class="hero-text">
         <div class="eyebrow mono">Data Analyst · AI Automation</div>
         <h1>I turn manual data work into workflows that run themselves.</h1>
-        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it, designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
+        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it — designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
       </div>
       <div class="hero-diagram">
         <div class="hero-diagram-panel">
@@ -751,7 +742,6 @@
       </div>
       <button class="cert-nav next" id="certNext" aria-label="Next">›</button>
     </div>
-    <div class="cert-dots" id="certDots"></div>
   </div>
 </section>
 
@@ -813,7 +803,7 @@
     p1: {
       id: "AI/01",
       title: "Integrated AI Workflow — OCR + Sentiment Analysis",
-      media: [ { type: "image", src: "assets/workflow-p1.svg" } ],
+      media: [ { type: "image", src: "assets/workflow-1.jpg" } ],
       how: [
         "Set up an automated flow triggered by a new file appearing in a monitored folder.",
         "Added an OCR action, mapping the trigger's file content into the image field to extract text from the upload.",
@@ -825,7 +815,7 @@
     p2: {
       id: "FLOW/02",
       title: "Equipment Approval & Inventory System",
-      media: [ { type: "image", src: "assets/workflow-p2.svg" } ],
+      media: [ { type: "image", src: "assets/workflow-2.jpg" } ],
       how: [
         "Built a tracking list with columns for borrower name, item needed, return date, and approval status, defaulted to Pending.",
         "Built a form asking for the requester's name, the item needed, and the return date.",
@@ -837,7 +827,7 @@
     p3: {
       id: "FLOW/03",
       title: "Event Registration & Ticket Generator",
-      media: [ { type: "image", src: "assets/workflow-p3.svg" } ],
+      media: [ { type: "image", src: "assets/workflow-3.jpg" } ],
       how: [
         "Built a registration form asking for email, project name, and full name, plus a roster list to store the cleaned-up data.",
         "Set the trigger to fire on form submission and pulled the response details.",
@@ -995,7 +985,6 @@
   const certTrack = document.getElementById('certTrack');
   const certPrev = document.getElementById('certPrev');
   const certNext = document.getElementById('certNext');
-  const certDots = document.getElementById('certDots');
   const certOverlay = document.getElementById('certOverlay');
   const certModalImage = document.getElementById('certModalImage');
   const certModalTitle = document.getElementById('cert-modal-title');
@@ -1040,38 +1029,8 @@
     if(e.key === 'Escape' && certOverlay.classList.contains('open')) closeCertModal();
   });
 
-  // Carousel scroll + dots
+  // Carousel scroll
   const certCards = Array.from(certTrack.children);
-  function buildCertDots(){
-    certDots.innerHTML = '';
-    certCards.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'cert-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `Scroll to certificate ${i + 1}`);
-      dot.addEventListener('click', () => {
-        certCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      });
-      certDots.appendChild(dot);
-    });
-  }
-  buildCertDots();
-
-  function updateActiveDot(){
-    const trackLeft = certTrack.scrollLeft;
-    let closestIndex = 0;
-    let closestDist = Infinity;
-    certCards.forEach((card, i) => {
-      const dist = Math.abs(card.offsetLeft - trackLeft);
-      if(dist < closestDist){ closestDist = dist; closestIndex = i; }
-    });
-    Array.from(certDots.children).forEach((dot, i) => {
-      dot.classList.toggle('active', i === closestIndex);
-    });
-  }
-  certTrack.addEventListener('scroll', () => {
-    window.requestAnimationFrame(updateActiveDot);
-  });
-
   function certScrollAmount(){
     const card = certCards[0];
     const style = getComputedStyle(certTrack);
