@@ -545,9 +545,9 @@
   <div class="wrap">
     <div class="hero-inner">
       <div class="hero-text">
-        <div class="eyebrow mono">Data Analyst · AI Automation</div>
+        <div class="eyebrow mono">AI Automation</div>
         <h1>I turn manual data work into workflows that run themselves.</h1>
-        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it — designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
+        <p class="lede">I come from a data analytics background and I've been building AI automation skills on top of it, designing workflows that handle data entry, approvals, notifications, and reporting automatically, using tools like Power Automate, Make, and AI Builder.</p>
       </div>
       <div class="hero-diagram">
         <div class="hero-diagram-panel">
@@ -674,6 +674,8 @@
       <div class="skills">
         <span class="skill">Power Automate</span>
         <span class="skill">Make</span>
+        <span class="skill">AI Builder (OCR)</span>
+        <span class="skill">AI Builder (Sentiment)</span>
         <span class="skill">Excel</span>
         <span class="skill">SQL</span>
         <span class="skill">Google Sheets</span>
@@ -694,7 +696,7 @@
       <button class="cert-nav prev" id="certPrev" aria-label="Previous">‹</button>
       <div class="cert-track" id="certTrack">
         <div class="cert-card" data-cert="c1" tabindex="0" role="button" aria-haspopup="dialog">
-          <img src="assets/certs/cert-ai-ready-asean.jpg" alt="AI Ready ASEAN certificate">
+          <img src="assets/certs/cert-ai-ready-asean.png" alt="AI Ready ASEAN certificate">
           <div class="cert-card-body">
             <div class="cert-card-name">AI Learning Modules</div>
             <div class="cert-card-issuer">AI Ready ASEAN</div>
@@ -703,7 +705,7 @@
         </div>
 
         <div class="cert-card" data-cert="c2" tabindex="0" role="button" aria-haspopup="dialog">
-          <img src="assets/certs/cert-openai-academy.jpg" alt="OpenAI Academy certificate">
+          <img src="assets/certs/cert-openai-academy.png" alt="OpenAI Academy certificate">
           <div class="cert-card-body">
             <div class="cert-card-name">Apply AI at Work — Pathway</div>
             <div class="cert-card-issuer">OpenAI Academy</div>
@@ -712,7 +714,7 @@
         </div>
 
         <div class="cert-card" data-cert="c3" tabindex="0" role="button" aria-haspopup="dialog">
-          <img src="assets/certs/cert-ibm-skillsbuild.jpg" alt="IBM SkillsBuild certificate">
+          <img src="assets/certs/cert-ibm-skillsbuild.png" alt="IBM SkillsBuild certificate">
           <div class="cert-card-body">
             <div class="cert-card-name">Getting Started with Generative AI</div>
             <div class="cert-card-issuer">IBM SkillsBuild</div>
@@ -721,7 +723,7 @@
         </div>
 
         <div class="cert-card" data-cert="c4" tabindex="0" role="button" aria-haspopup="dialog">
-          <img src="assets/certs/cert-oracle.jpg" alt="Oracle certificate">
+          <img src="assets/certs/cert-oracle.png" alt="Oracle certificate">
           <div class="cert-card-body">
             <div class="cert-card-name">Agentic AI Foundations Associate</div>
             <div class="cert-card-issuer">Oracle University</div>
@@ -729,23 +731,14 @@
           </div>
         </div>
 
-        <div class="cert-card" data-cert="c4" tabindex="0" role="button" aria-haspopup="dialog">
-          <img src="assets/certs/cert-azure.jpg" alt="Microsoft certificate">
+        <div class="cert-card" data-cert="c5" tabindex="0" role="button" aria-haspopup="dialog">
+          <img src="assets/certs/cert-azure.jpg" alt="Microsoft Azure AI Fundamentals certificate">
           <div class="cert-card-body">
-            <div class="cert-card-name">Microsoft Azure Certification</div>
+            <div class="cert-card-name">Azure AI Fundamentals</div>
             <div class="cert-card-issuer">Microsoft</div>
             <div class="cert-card-status"><span class="sdot"></span>completed</div>
           </div>
         </div>
-        
-        <!-- <div class="cert-card upcoming">
-          <div class="cert-card-placeholder">certificate not yet issued</div>
-          <div class="cert-card-body">
-            <div class="cert-card-name">Microsoft Azure Certification</div>
-            <div class="cert-card-issuer">Microsoft</div>
-            <div class="cert-card-status upcoming"><span class="sdot"></span>in progress</div>
-          </div>
-        </div> -->
       </div>
       <button class="cert-nav next" id="certNext" aria-label="Next">›</button>
     </div>
@@ -810,10 +803,7 @@
     p1: {
       id: "AI/01",
       title: "Integrated AI Workflow — OCR + Sentiment Analysis",
-      media: [
-        { type: "image", src: "assets/workflow-1.jpg" },
-        { type: "video", src: "assets/workflow-1.mp4" }
-      ],
+      media: [ { type: "image", src: "assets/workflow-p1.svg" } ],
       how: [
         "Set up an automated flow triggered by a new file appearing in a monitored folder.",
         "Added an OCR action, mapping the trigger's file content into the image field to extract text from the upload.",
@@ -825,10 +815,7 @@
     p2: {
       id: "FLOW/02",
       title: "Equipment Approval & Inventory System",
-      media: [
-        { type: "image", src: "assets/workflow-2.jpg" },
-        { type: "video", src: "assets/workflow-2.mp4" }
-      ],
+      media: [ { type: "image", src: "assets/workflow-p2.svg" } ],
       how: [
         "Built a tracking list with columns for borrower name, item needed, return date, and approval status, defaulted to Pending.",
         "Built a form asking for the requester's name, the item needed, and the return date.",
@@ -840,10 +827,7 @@
     p3: {
       id: "FLOW/03",
       title: "Event Registration & Ticket Generator",
-      media: [
-        { type: "image", src: "assets/workflow-3.jpg" },
-        { type: "video", src: "assets/workflow-3.mp4" }
-      ],
+      media: [ { type: "image", src: "assets/workflow-p3.svg" } ],
       how: [
         "Built a registration form asking for email, project name, and full name, plus a roster list to store the cleaned-up data.",
         "Set the trigger to fire on form submission and pulled the response details.",
@@ -975,32 +959,32 @@
     c1: {
       name: "AI Learning Modules",
       issuer: "AI Ready ASEAN — ASEAN Foundation",
-      image: "assets/certs/cert-ai-ready-asean.jpg",
-      link: "assets/certs/cert-ai-ready-asean.jpg"
+      image: "assets/certs/cert-ai-ready-asean.png",
+      link: "assets/certs/cert-ai-ready-asean.png"
     },
     c2: {
       name: "Apply AI at Work — Pathway Completion",
       issuer: "OpenAI Academy",
-      image: "assets/certs/cert-openai-academy.jpg",
+      image: "assets/certs/cert-openai-academy.png",
       link: "https://oaiacademy.credential.net/e9d6a8fd-819b-4d10-beae-155d4e20a04b#acc.PNfU1Tjg"
     },
     c3: {
       name: "Getting Started with Generative AI",
       issuer: "IBM SkillsBuild",
-      image: "assets/certs/cert-ibm-skillsbuild.jpg",
+      image: "assets/certs/cert-ibm-skillsbuild.png",
       link: "https://www.credly.com/badges/904b1715-9e5e-43d6-bfc3-3d933bf79ed8/linked_in_profile"
     },
     c4: {
       name: "Agentic AI Foundations Associate",
       issuer: "Oracle University",
-      image: "assets/certs/cert-oracle.jpg",
+      image: "assets/certs/cert-oracle.png",
       link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=A47DF88B9432C06D60B08096901B5D80B38F6044815FFE87D5FCD7DDAF31DDE6"
     },
     c5: {
       name: "Azure AI Fundamentals",
       issuer: "Microsoft",
       image: "assets/certs/cert-azure.jpg",
-      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=A47DF88B9432C06D60B08096901B5D80B38F6044815FFE87D5FCD7DDAF31DDE6"
+      link: "https://verify.certiport.com/"
     }
   };
 
